@@ -5,20 +5,14 @@ describe('Search element', () => {
   })
 
   it('search for elements with multiple results', () => {    
-    cy.fixture('index').then((index)=>{    //trae todo el archivo index.json
-      cy.get(index.searchBox).type('dress');
-      cy.get(index.searchButton).click();
-    })
+    cy.search('dress');
     cy.fixture('searchResult').then((searchResult)=>{
       cy.get(searchResult.title).should('contain','dress');
     })
   })
 
   it('search for elements with no result',()=>{
-    cy.fixture('index').then((index)=>{    //trae todo el archivo index.json
-      cy.get(index.searchBox).type('qwerty');
-      cy.get(index.searchButton).click();
-    })
+    cy.search('qwerty');
     cy.fixture('searchResult').then((searchResult)=>{
       cy.get(searchResult.alert).should('contain','No results were found for your search')
     })
