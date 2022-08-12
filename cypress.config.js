@@ -1,10 +1,16 @@
+const AllureWriter = require('@shelex/cypress-allure-plugin/writer');
+
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  e2e: {    
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-      
-    },
-    baseUrl: 'http://automationpractice.com'
-}})
+  env: {
+    allure: true,
+  },
+  e2e: {
+      setupNodeEvents(on, config) {
+          AllureWriter(on, config);
+          return config;
+      },
+      baseUrl: 'http://automationpractice.com'
+  }
+});
